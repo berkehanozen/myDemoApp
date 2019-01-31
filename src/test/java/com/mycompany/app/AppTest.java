@@ -5,62 +5,51 @@ import java.util.Arrays;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import java.util.ArrayList;
+import java.util.Arrays;
+import junit.framework.TestCase;
 
-/**
- * Unit test for simple App.
- */
 public class AppTest
         extends TestCase
 {
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
+
+    public void testSuccessful() {
+        ArrayList<Integer> array = new ArrayList<>(Arrays.asList(0,1, 2, 3, 4, 5, 6, 7, 8, 9));
+        ArrayList<Integer> array2 = new ArrayList<>(Arrays.asList(0, 2, 4, 6, 8, 10, 12, 14, 16, 18));
+        String[] str = new String[]{"ahmet","mehmet","ali","selim","mahmut","riza","suleyman","murat","oguz","kerem"};
+        String[] str2 = new String[]{"ahmet","mehmet","ali","selim","kerem","oguz","murat","suleyman","riza","mahmut"};
+        assertTrue(Arrays.equals(new App().swapStrings(array, array2, str, 9, 2), str2));
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
-    }
-
-    public void testFound() {
-        ArrayList<Integer> array = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
-        ArrayList<Integer> array2 = new ArrayList<>(Arrays.asList(3, 8, 5, 1));
-        assertTrue(new App().search(array, array2, 3, 5));
-    }
-
-    public void testNotFound() {
-        ArrayList<Integer> array = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
-        ArrayList<Integer> array2 = new ArrayList<>(Arrays.asList(3, 8, 5, 1));
-        assertFalse(new App().search(array, array2, 3, 8));
+    public void testNotSuccessful() {
+        ArrayList<Integer> array = new ArrayList<>(Arrays.asList(0,1, 2, 3, 4, 5, 6, 7, 8, 9));
+        ArrayList<Integer> array2 = new ArrayList<>(Arrays.asList(0, 2, 4, 6, 8, 10, 12, 14, 16, 18));
+        String[] str = new String[]{"ahmet","mehmet","ali","selim","mahmut","riza","suleyman","murat","oguz","kerem"};
+        String[] str2 = new String[]{"ahmet","mehmet","ali","selim","mahmut","riza","suleyman","oguz","murat","kerem"};
+        assertFalse(Arrays.equals(new App().swapStrings(array, array2, str, 9, 3), str2));
     }
 
     public void testEmptyArray() {
         ArrayList<Integer> array = new ArrayList<>();
-        ArrayList<Integer> array2 = new ArrayList<>(Arrays.asList(3, 8, 5, 1));
-        assertFalse(new App().search(array, array2, 2, 1));
+        ArrayList<Integer> array2 = new ArrayList<>(Arrays.asList(0, 2, 4, 6, 8, 10, 12, 14, 16, 18));
+        String[] str = new String[]{"ahmet","mehmet","ali","selim","mahmut","riza","suleyman","murat","oguz","kerem"};
+        assertEquals(new App().swapStrings(array, array2, str, 2, 1), null);
     }
 
     public void testNull() {
         ArrayList<Integer> array2 = new ArrayList<>(Arrays.asList(3, 8, 5, 1));
-        assertFalse(new App().search(null, array2, 1, 2));
+        String[] str = new String[]{"ahmet","mehmet","ali","selim","mahmut","riza","suleyman","murat","oguz","kerem"};
+        assertEquals(new App().swapStrings(null, array2, str, 1, 2), null);
+    }
+
+    public void testIndexOutOFBounds() {
+        ArrayList<Integer> array = new ArrayList<>(Arrays.asList(0,1, 2, 3, 4, 5, 6, 7, 8, 9));
+        ArrayList<Integer> array2 = new ArrayList<>(Arrays.asList(0, 2, 4, 6, 8, 10, 12, 14, 16, 18));
+        String[] str = new String[]{"ahmet","mehmet","ali","selim","mahmut","riza","suleyman","murat","oguz","kerem"};
+        assertEquals(new App().swapStrings(null, array2, str, 11, 2), null);
     }
 
 
 }
+
 

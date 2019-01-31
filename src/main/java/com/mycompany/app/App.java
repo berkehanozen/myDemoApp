@@ -1,51 +1,37 @@
 package com.mycompany.app;
 
 import java.util.ArrayList;
+import java.lang.Math;
+import java.util.Arrays;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
-    }
-    public static boolean search(ArrayList<Integer> array, ArrayList<Integer> array2, int e, int f) {
+public class App {
+    public static String[] swapStrings(ArrayList<Integer> array, ArrayList<Integer> array2, String[] str, int array1Index, int array2Index) {
         System.out.println("inside search");
-        if (array == null || array2 == null) return false;
+        if (array == null || array2 == null || str == null) return null;
 
-        boolean checkE = false;
-        boolean checkF = false;
-        boolean arr1 = false;
-        boolean arr2 = false;
-        for (Integer anArray : array) {
-            if (anArray == e) {
-                checkE = true;
-            }
-            if (anArray == f) {
-                checkF = true;
-            }
-        }
-        if(checkE && checkF)
-            arr1 = true;
+        if(array1Index >= array.size() || array2Index >= array2.size()) return null;
 
-        checkE = false;
-        checkF = false;
+        int stringIndex1 = array.get(array1Index);
+        int stringIndex2 = array2.get(array2Index);
 
-        for (Integer anArray2 : array2) {
-            if (anArray2 == e) {
-                checkE = true;
+        if(stringIndex1 >= str.length || stringIndex2 >= str.length) return null;
+
+        while(Math.abs(stringIndex1 - stringIndex2) > 0){
+            String temp = str[stringIndex1];
+            str[stringIndex1] = str[stringIndex2];
+            str[stringIndex2] =  temp;
+            if(Math.abs(stringIndex1 - stringIndex2) == 1)
+                break;
+            if(stringIndex1 < stringIndex2){
+                stringIndex1++;
+                stringIndex2--;
             }
-            if (anArray2== f) {
-                checkF = true;
+            else{
+                stringIndex1--;
+                stringIndex2++;
             }
         }
-
-        if(checkE && checkF)
-            arr2 = true;
-
-        return arr1 && arr2;
+        return str;
     }
 }
+
